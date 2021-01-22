@@ -8,13 +8,14 @@ import {
 
 import { useAuth } from './security'
 import { LoginPage } from './pages/login'
-import { ProductsPage } from './pages/products'
+import { PromptsPage } from './pages/prompts'
 import { ProductNewPage } from './pages/product-new'
 import { ProductEditPage } from './pages/product-edit'
-import { ProductViewPage } from './pages/product-view'
+import { PromptsViewPage } from './pages/prompt-view'
 import { SingupPage } from './pages/signup'
 import { MainPage } from './pages/main'
 import { NotFound } from './pages/NotFound'
+import { StoryPage } from './pages/story'
 
 export function AppRouter() {
 	return (
@@ -25,21 +26,18 @@ export function AppRouter() {
 				<Route exact path="/login" component={LoginPage} />
 
 				<PrivateRoute exact path="/" component={MainPage} />
-				<Route component={NotFound} />
 				{/*<PrivateRoute path="/products/new" component={ProductNewPage} />*/}
-				{/*<PrivateRoute*/}
-				{/*	exact*/}
-				{/*	path="/products/:id"*/}
-				{/*	component={ProductViewPage}*/}
-				{/*/>*/}
+				<PrivateRoute path="/prompts/:id" component={PromptsViewPage} />
+				<PrivateRoute path="/story/:id" component={StoryPage} />
 				{/*<PrivateRoute*/}
 				{/*	path="/products/:id/edit"*/}
 				{/*	component={ProductEditPage}*/}
 				{/*/>*/}
-				{/*<PrivateRoute exact path="/products" component={ProductsPage} />*/}
+				<PrivateRoute exact path="/prompts" component={PromptsPage} />
 				{/*<Route exact path="/">*/}
 				{/*	<Redirect to={{ pathname: '/private' }} />*/}
 				{/*</Route>*/}
+				<Route component={NotFound} />
 			</Switch>
 		</Router>
 	)

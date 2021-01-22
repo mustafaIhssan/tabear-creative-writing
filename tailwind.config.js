@@ -1,8 +1,13 @@
 module.exports = {
 	purge: [],
 	theme: {
-		extend: { opacity: ['disabled'] },
+		extend: {
+			lineClamp: {
+				10: '10',
+			},
+			opacity: ['disabled'],
+		},
 	},
 	variants: {},
-	plugins: [],
+	plugins: [require('@tailwindcss/line-clamp')],
 }
