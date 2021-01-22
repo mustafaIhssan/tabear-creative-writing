@@ -16,7 +16,7 @@ export function CommentSection({ story }) {
 
 	return (
 		<div className="m-5">
-			{comments.map((i) => (
+			{comments?.map((i) => (
 				<Comment key={i.id} comment={i} />
 			))}
 		</div>
