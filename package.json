@@ -1,0 +1,74 @@
+{
+	"name": "react-base",
+	"version": "0.1.0",
+	"private": true,
+	"proxy": "https://quadragon.xyz",
+	"dependencies": {
+		"@tailwindcss/postcss7-compat": "^2.0.2",
+		"antd": "^4.10.3",
+		"autoprefixer": "^10",
+		"classnames": "^2.2.6",
+		"firebase": "^8.2.4",
+		"husky": "^4.3.8",
+		"i18next": "^19.8.4",
+		"i18next-browser-languagedetector": "^6.0.1",
+		"i18next-http-backend": "^1.0.22",
+		"jwt-decode": "^3.1.2",
+		"lodash": "^4.17.20",
+		"react": "^17.0.1",
+		"react-dom": "^17.0.1",
+		"react-i18next": "^11.8.5",
+		"react-query": "^3.5.16",
+		"react-router-dom": "^5.2.0",
+		"react-scripts": "4.0.1",
+		"tailwindcss": "npm:@tailwindcss/postcss7-compat",
+		"use-local-storage-state": "^6.0.3",
+		"web-vitals": "^1.1.0"
+	},
+	"scripts": {
+		"build:tailwind": "tailwindcss build src/styles/tailwind.css -o src/styles/tailwind.output.css",
+		"prestart": "npm run build:tailwind",
+		"prebuild": "npm run build:tailwind",
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"lint": "eslint ./src",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"devDependencies": {
+		"@wordpress/eslint-plugin": "^7.4.0",
+		"eslint": "^7.18.0",
+		"eslint-config-prettier": "^7.2.0",
+		"eslint-plugin-prettier": "^3.3.1",
+		"lint-staged": "^10.5.3",
+		"postcss": "^8",
+		"prettier": "^2.2.1"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"volta": {
+		"node": "14.15.4",
+		"yarn": "1.22.5"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.js": [
+			"prettier --write",
+			"npm run lint"
+		]
+	}
+}
