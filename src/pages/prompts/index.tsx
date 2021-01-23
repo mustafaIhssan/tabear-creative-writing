@@ -10,12 +10,14 @@ export function PromptsPage() {
 		firestore.collection('prompt')
 	)
 
+	// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'doc' implicitly has an 'any' type.
 	const prompts = data?.docs?.map((doc) => ({ ...doc.data(), id: doc.id }))
 
 	return (
 		<Layout>
 			{error && <strong>Error: {JSON.stringify(error)}</strong>}
 
+			{/* @ts-expect-error ts-migrate(2786) FIXME: 'PageSpinner' cannot be used as a JSX component. */}
 			{isLoading ? <PageSpinner /> : <PromptsList data={prompts} />}
 		</Layout>
 	)

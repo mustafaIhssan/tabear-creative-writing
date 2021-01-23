@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
 import { useDocument } from 'react-firebase-hooks/firestore'
 import { firestore } from '../../firebase'
 
-export function PromptsForm({ form, data }) {
+export function PromptsForm({ form, data }: any) {
 	const { t } = useTranslation()
 
 	const language = [
@@ -21,12 +21,14 @@ export function PromptsForm({ form, data }) {
 	const [tagsSnapShot, isLoading, error] = useDocument(
 		firestore.collection(`story-tags`)
 	)
+	// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'doc' implicitly has an 'any' type.
 	const tags = tagsSnapShot?.docs?.map((doc) => ({
 		...doc.data(),
 		id: doc.id,
 	}))
 
 	return isLoading ? (
+		// @ts-expect-error ts-migrate(2786) FIXME: 'PageSpinner' cannot be used as a JSX component.
 		<PageSpinner />
 	) : (
 		<div>
@@ -80,6 +82,7 @@ export function PromptsForm({ form, data }) {
 						label="Product Type"
 					>
 						<Select showSearch mode="multiple">
+							{/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'option' implicitly has an 'any' type. */}
 							{tags.map((option) => (
 								<Select.Option
 									key={option.value}

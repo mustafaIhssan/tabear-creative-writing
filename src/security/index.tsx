@@ -14,11 +14,13 @@ const SecurityContext = createContext(SECURITY_CONTEXT_DEFAULT)
 
 export const useAuth = () => useContext(SecurityContext)
 
+// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'children' implicitly has an 'any'... Remove this comment to see the full error message
 export const SecurityProvider = ({ children }) => {
 	const [user, setUser] = useLocalStorageState(LOCAL_STORAGE_USR, {})
 	const [loading, setLoading] = useState(false)
 	const [isReady, setIsReady] = useState(false)
 
+	// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'email' implicitly has an 'any' ty... Remove this comment to see the full error message
 	async function singup({ email, password }) {
 		setLoading(true)
 		try {
@@ -35,6 +37,7 @@ export const SecurityProvider = ({ children }) => {
 		}
 	}
 
+	// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'email' implicitly has an 'any' ty... Remove this comment to see the full error message
 	async function login({ email, password }) {
 		try {
 			const newUser = await auth.signInWithEmailAndPassword(
@@ -57,6 +60,7 @@ export const SecurityProvider = ({ children }) => {
 		setLoading(true)
 		// eslint-disable-next-line @wordpress/no-unused-vars-before-return
 		const unsubscribe = auth.onAuthStateChanged((newUser) => {
+			// @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'User | null' is not assignable t... Remove this comment to see the full error message
 			setUser(newUser)
 			setIsReady(true)
 		})
@@ -78,7 +82,9 @@ export const SecurityProvider = ({ children }) => {
 				isAuthenticated: !!user,
 				singup,
 				loading,
+				// @ts-expect-error ts-migrate(2322) FIXME: Type '({ email, password }: { email: any; password... Remove this comment to see the full error message
 				login,
+				// @ts-expect-error ts-migrate(2322) FIXME: Type '() => Promise<void>' is not assignable to ty... Remove this comment to see the full error message
 				logout,
 			}}
 		>

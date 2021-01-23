@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Button } from 'antd'
 
-export function UserStory({ story }) {
+export function UserStory({ story }: any) {
 	return (
 		<div className="flex bg-blue-200 p-5 rounded-lg flex flex-col mb-5">
 			<div className="flex items-center">

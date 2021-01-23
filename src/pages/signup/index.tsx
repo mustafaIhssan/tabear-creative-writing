@@ -6,14 +6,17 @@ import { rules } from '../../utils/rules'
 import { Layout } from '../../components/layout'
 
 export function SingupPage() {
+	// @ts-expect-error ts-migrate(2339) FIXME: Property 'singup' does not exist on type '{ login:... Remove this comment to see the full error message
 	const { singup, loading } = useAuth()
 
 	const history = useHistory()
 	const location = useLocation()
 	const [error, setError] = useState(null)
 
+	// @ts-expect-error ts-migrate(2339) FIXME: Property 'from' does not exist on type 'unknown'.
 	const { from } = location.state || { from: { pathname: '/' } }
 
+	// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'values' implicitly has an 'any' type.
 	const onFinish = async (values) => {
 		const { isSuccess, data } = await singup(values)
 
@@ -25,6 +28,7 @@ export function SingupPage() {
 		}
 	}
 
+	// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'errorInfo' implicitly has an 'any' type... Remove this comment to see the full error message
 	const onFinishFailed = (errorInfo) => {
 		console.log('Failed:', errorInfo)
 	}
@@ -56,6 +60,7 @@ export function SingupPage() {
 							<Form.Item
 								label="Email"
 								name="email"
+								// @ts-expect-error ts-migrate(2322) FIXME: Type '({ required: boolean; message: string; type?... Remove this comment to see the full error message
 								rules={rules.email}
 							>
 								<Input />

@@ -2,11 +2,12 @@ import React from 'react'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { firestore } from '../../firebase'
 
-export function CommentSection({ story }) {
+export function CommentSection({ story }: any) {
 	const [_comments, isLoading] = useCollection(
 		firestore.collection('comments').where('story', '==', story)
 	)
 
+	// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'doc' implicitly has an 'any' type.
 	const comments = _comments?.docs?.map((doc) => ({
 		...doc.data(),
 		id: doc.id,
@@ -14,6 +15,7 @@ export function CommentSection({ story }) {
 
 	return (
 		<div className="m-5">
+			{/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'i' implicitly has an 'any' type. */}
 			{comments?.map((i) => (
 				<Comment key={i.id} comment={i} />
 			))}
@@ -21,6 +23,7 @@ export function CommentSection({ story }) {
 	)
 }
 
+// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'comment' implicitly has an 'any' ... Remove this comment to see the full error message
 export function Comment({ comment }) {
 	return (
 		<div className="flex bg-blue-200 p-5 rounded-lg flex flex-col mb-5">

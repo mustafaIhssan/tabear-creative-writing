@@ -1,7 +1,9 @@
 export function Logo() {
 	return (
+		// @ts-expect-error ts-migrate(2304) FIXME: Cannot find name 'div'.
 		<div className="text-xl">
-			Creative<strong>Tabear</strong>
+			// @ts-expect-error ts-migrate(2304) FIXME: Cannot find name
+			'Creative'. Creative<strong>Tabear</strong>
 		</div>
 	)
 }

@@ -6,6 +6,7 @@ import { useQueryClient } from 'react-query'
 // import { useFetch, useMutation } from '../../api'
 import { PageSpinner } from '../../components/page-spinner'
 import { Layout } from '../../components/layout'
+// @ts-expect-error ts-migrate(2305) FIXME: Module '"../../components/prompts-form"' has no ex... Remove this comment to see the full error message
 import { ProductForm } from '../../components/prompts-form'
 import { useAuth } from '../../security'
 import { ErrorTag } from '../../components/error-tag'
