@@ -29,21 +29,23 @@ export function Header() {
 					{isAuthenticated ? (
 						<>
 							<Button onClick={logout} type="primary">
-								{t('Logout')}
+								{t('system.logout')}
 							</Button>
-							<Link key="add-product" to="/products/new">
+							<Link key="add-product" to="/prompts/new">
 								<Button type="primary">
-									{t('Add Product')}
+									{t('prompt.add')}
 								</Button>
 							</Link>
 						</>
 					) : (
 						<>
 							<Link key="sing-up" to="/singup">
-								<Button type="primary">{t('Sign Up')}</Button>
+								<Button type="primary">
+									{t('system.signup')}
+								</Button>
 							</Link>
 							<Link key="sign-in" to="/login">
-								<Button>{t('Sign in')}</Button>
+								<Button>{t('system.signin')}</Button>
 							</Link>
 						</>
 					)}

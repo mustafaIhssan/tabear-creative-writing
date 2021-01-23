@@ -1,8 +1,6 @@
 import React from 'react'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { firestore } from '../../firebase'
-import { Link } from 'react-router-dom'
-import { Button } from 'antd'
 
 export function CommentSection({ story }) {
 	const [_comments, isLoading] = useCollection(

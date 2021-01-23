@@ -9,7 +9,7 @@ import {
 import { useAuth } from './security'
 import { LoginPage } from './pages/login'
 import { PromptsPage } from './pages/prompts'
-import { ProductNewPage } from './pages/product-new'
+import { ProductNewPage, PromptsNewPage } from './pages/prompts-new'
 import { ProductEditPage } from './pages/product-edit'
 import { PromptsViewPage } from './pages/prompt-view'
 import { SingupPage } from './pages/signup'
@@ -26,7 +26,11 @@ export function AppRouter() {
 				<Route exact path="/login" component={LoginPage} />
 
 				<PrivateRoute exact path="/" component={MainPage} />
-				{/*<PrivateRoute path="/products/new" component={ProductNewPage} />*/}
+				<PrivateRoute
+					exact
+					path="/prompts/new"
+					component={PromptsNewPage}
+				/>
 				<PrivateRoute path="/prompts/:id" component={PromptsViewPage} />
 				<PrivateRoute path="/story/:id" component={StoryPage} />
 				{/*<PrivateRoute*/}
