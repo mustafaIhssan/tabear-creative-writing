@@ -8,10 +8,16 @@ module.exports = {
 		'sci-fi': 'Sci-Fi',
 		fantasy: 'Fantasy',
 		plot: 'Plot',
-		'prompt.add': 'New Prompt',
-		'prompt.button.add': 'Add Prompt',
-		'system.logout': 'Logout',
-		'system.signup': 'Sign Up',
-		'system.signin': 'Sign In',
+		prompt: {
+			add: 'New Prompt',
+			button: {
+				add: 'Add Prompt',
+			},
+		},
+		system: {
+			logout: 'Logout',
+			signup: 'Sign Up',
+			signin: 'Sign In',
+		},
 	},
 }
