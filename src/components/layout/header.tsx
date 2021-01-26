@@ -16,13 +16,11 @@ export function Header() {
 		t('Delicious sweets'),
 	]
 
-	// @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 2.
 	const subTitle = useTyper(siteSubtitle, true)
 
 	return (
 		<div className="sticky top-0 z-10 flex w-full items-center justify-between px-6 h-16 bg-white border-b border-gray-200">
 			<Space className="flex items-center">
-				{/* @ts-expect-error ts-migrate(2786) FIXME: 'Logo' cannot be used as a JSX component. */}
 				<Logo />
 				<span className="text-gray-400">{subTitle}</span>
 			</Space>

@@ -7,7 +7,7 @@ const DEFAULT_OPTIONS = {
 }
 
 // @ts-expect-error ts-migrate(7006) FIXME: Parameter 'words' implicitly has an 'any' type.
-export function useTyper(words, enabled = true, options) {
+export function useTyper(words, enabled = true, options = {}) {
 	const [charIndex, setCharIndex] = useState(0)
 	const [wordIndex, setWordIndex] = useState(0)
 	const [mode, setMode] = useState('TYPING')

@@ -6,6 +6,18 @@ module.exports = {
 	env: {
 		browser: true,
 	},
+	plugins: ['@typescript-eslint'],
+	parser: '@typescript-eslint/parser',
+	parserOptions: {
+		project: './tsconfig.json',
+	},
+	settings: {
+		'import/resolver': {
+			typescript: {
+				alwaysTryTypes: true,
+			},
+		},
+	},
 	rules: {
 		'dependency-group': 'off',
 		'gutenberg-phase': 'off',
