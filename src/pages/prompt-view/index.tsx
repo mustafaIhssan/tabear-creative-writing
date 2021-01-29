@@ -1,41 +1,30 @@
 import React from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { Button } from 'antd'
-import { strip } from '../../utils/utils'
+import { useParams } from 'react-router-dom'
 import { PageSpinner } from '../../components/page-spinner'
 import { Layout } from '../../components/layout'
-import { useAuth } from '../../security'
-import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
+import { useDocument } from 'react-firebase-hooks/firestore'
 import { firestore } from '../../firebase'
-import { UserStory } from './user-story'
+import { UserStory } from '../../components/user-story'
+import { useStory } from '../../api/story'
 
 export function PromptsViewPage() {
 	const { id }: any = useParams()
 
 	const [promptSnapShot, isLoading, error] = useDocument(
-		firestore.doc(`prompt/${id}`)
+		firestore.doc(`prompt/${id}`),
 	)
 	const prompt = { ...promptSnapShot?.data(), id: promptSnapShot?.id }
 
-	const [storiesSnapshot, isStoriesLoading] = useCollection(
-		firestore.collection('story').where('prompt', '==', id)
-	)
-
-	const stories = storiesSnapshot?.docs?.map((doc: any) => ({
-		...doc.data(),
-		id: doc.id,
-	}))
-
-	console.log({ stories })
+	const [stories] = useStory({
+		where: { id, field: 'prompt' },
+	})
 
 	return (
 		<Layout>
-			{isLoading ? (
-				<PageSpinner />
-			) : (
-				<div className="text-center px-32">
-					<h1 className="mt-8 text-xl font-semibold">{prompt.id}</h1>
-					<h1 className="mt-8 text-xl font-semibold">
+			<PageSpinner loading={isLoading}>
+				<div className='text-center px-32'>
+					<h1 className='mt-8 text-xl font-semibold'>{prompt.id}</h1>
+					<h1 className='mt-8 text-xl font-semibold'>
 						Language: {prompt.language}
 					</h1>
 
@@ -49,13 +38,13 @@ export function PromptsViewPage() {
 						))}
 					</h2>
 
-					<span className="mt-2 p-4">{prompt.content}</span>
+					<span className='mt-2 p-4'>{prompt.content}</span>
 
 					{stories?.map((i: any) => (
 						<UserStory key={i.id} story={i} />
 					))}
 				</div>
-			)}
+			</PageSpinner>
 		</Layout>
 	)
 }

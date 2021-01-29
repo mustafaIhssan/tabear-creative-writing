@@ -16,9 +16,7 @@ export function StoryPage() {
 
 	return (
 		<Layout>
-			{isLoading ? (
-				<PageSpinner />
-			) : (
+			<PageSpinner loading={isLoading}>
 				<div className="text-center px-32">
 					<h1 className="mt-8 text-xl font-semibold">{story.id}</h1>
 					<h1 className="mt-8 text-xl font-semibold">
@@ -30,7 +28,7 @@ export function StoryPage() {
 
 					<CommentSection story={id} />
 				</div>
-			)}
+			</PageSpinner>
 		</Layout>
 	)
 }

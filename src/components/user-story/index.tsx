@@ -4,7 +4,7 @@ import { Button } from 'antd'
 
 export function UserStory({ story }: any) {
 	return (
-		<div className="flex bg-blue-200 p-5 rounded-lg flex flex-col mb-5">
+		<div className="flex text-center bg-blue-200 p-5 rounded-lg flex flex-col mb-5">
 			<div className="flex items-center">
 				<div className="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
 					{story.score}
@@ -17,9 +17,9 @@ export function UserStory({ story }: any) {
 				{story.content}
 			</div>
 
-			<Link to={`/story/${story.id}`}>
-				<Button>View</Button>
-			</Link>
+			<Button className="w-20 mx-auto">
+				<Link to={`/story/${story.id}`}>View</Link>
+			</Button>
 		</div>
 	)
 }

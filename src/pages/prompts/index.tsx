@@ -18,7 +18,9 @@ export function PromptsPage() {
 	return (
 		<Layout>
 			{error && <strong>Error: {JSON.stringify(error)}</strong>}
-			{isLoading ? <PageSpinner /> : <PromptsList data={prompts} />}
+			<PageSpinner loading={isLoading}>
+				<PromptsList data={prompts} />
+			</PageSpinner>
 		</Layout>
 	)
 }
