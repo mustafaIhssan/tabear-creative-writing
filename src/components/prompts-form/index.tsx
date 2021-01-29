@@ -7,8 +7,6 @@ import { useDocument } from 'react-firebase-hooks/firestore'
 import { firestore } from '../../firebase'
 
 export function PromptsForm({ form, data }: any) {
-	console.log({ data })
-
 	const { t } = useTranslation()
 
 	const language = [

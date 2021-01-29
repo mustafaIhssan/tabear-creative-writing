@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { PageSpinner } from '../../components/page-spinner'
-import { Layout } from '../../components/layout'
+import { PageSpinner } from '../../../components/page-spinner'
+import { Layout } from '../../../components/layout'
 import { useDocument } from 'react-firebase-hooks/firestore'
-import { firestore } from '../../firebase'
-import { UserStory } from '../../components/user-story'
-import { useStory } from '../../api/story'
+import { firestore } from '../../../firebase'
+import { UserStory } from '../../../components/user-story'
+import { useStory } from '../../../api/story'
 import { Button } from 'antd'
 
 export function PromptsViewPage() {

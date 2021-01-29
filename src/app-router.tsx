@@ -9,13 +9,16 @@ import {
 import { useAuth } from './security'
 import { LoginPage } from './pages/login'
 import { PromptsPage } from './pages/prompts'
-import { PromptsNewPage } from './pages/prompts-new'
-import { PromptEditPage } from './pages/prompt-edit'
-import { PromptsViewPage } from './pages/prompt-view'
 import { SingupPage } from './pages/signup'
 import { MainPage } from './pages/main'
 import { NotFound } from './pages/NotFound'
-import { StoryPage } from './pages/story'
+import { StoriesPage } from './pages/stories'
+import { PromptsViewPage } from './pages/prompt/view'
+import { PromptEditPage } from './pages/prompt/edit'
+import { PromptsNewPage } from './pages/prompt/new'
+import { StoryPage } from './pages/story/view'
+import { StoryEditPage } from './pages/story/edit'
+import { StoryNewPage } from './pages/story/new'
 
 export function AppRouter() {
 	return (
@@ -26,24 +29,35 @@ export function AppRouter() {
 				<Route exact path="/login" component={LoginPage} />
 
 				<PrivateRoute exact path="/" component={MainPage} />
-				<PrivateRoute
-					exact
-					path="/prompts/new"
-					component={PromptsNewPage}
-				/>
-				<PrivateRoute
-					path="/prompts/:id/update"
-					component={PromptEditPage}
-				/>
-				<PrivateRoute path="/prompts/:id" component={PromptsViewPage} />
-				<PrivateRoute path="/story/:id" component={StoryPage} />
-				<PrivateRoute exact path="/prompts" component={PromptsPage} />
-				{/*<Route exact path="/">*/}
-				{/*	<Redirect to={{ pathname: '/private' }} />*/}
-				{/*</Route>*/}
+
+				<PrivateRoute path="/prompts" component={Prompts} />
+				<PrivateRoute path="/story" component={Story} />
+
 				<Route component={NotFound} />
 			</Switch>
 		</Router>
+	)
+}
+
+function Prompts() {
+	return (
+		<Switch>
+			<Route exact path="/prompts/new" component={PromptsNewPage} />
+			<Route path="/prompts/:id/update" component={PromptEditPage} />
+			<Route path="/prompts/:id" component={PromptsViewPage} />
+			<Route exact path="/prompts" component={PromptsPage} />
+		</Switch>
+	)
+}
+
+function Story() {
+	return (
+		<Switch>
+			<Route exact path="/story/:promptId/new" component={StoryNewPage} />
+			<Route path="/story/:id/update" component={StoryEditPage} />
+			<Route path="/story/:id" component={StoryPage} />
+			<Route exact path="/story" component={StoriesPage} />
+		</Switch>
 	)
 }
 

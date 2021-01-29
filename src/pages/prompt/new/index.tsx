@@ -1,16 +1,10 @@
 import React, { useState } from 'react'
-import { Layout } from '../../components/layout'
-import { PromptsForm } from '../../components/prompts-form'
-import { nanoid } from 'nanoid'
+import { Layout } from '../../../components/layout'
+import { PromptsForm } from '../../../components/prompts-form'
 import { useHistory } from 'react-router-dom'
 
 import { Button, Form } from 'antd'
-import { ErrorTag } from '../../components/error-tag'
-import { useQueryClient } from 'react-query'
-import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
-import { firestore } from '../../firebase'
 import { useTranslation } from 'react-i18next'
-import { PageSpinner } from '../../components/page-spinner'
 
 export function PromptsNewPage() {
 	const { t } = useTranslation()

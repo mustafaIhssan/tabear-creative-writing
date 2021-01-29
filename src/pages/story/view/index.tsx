@@ -1,10 +1,11 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
-import { Layout } from '../../components/layout'
+import { Link, useParams } from 'react-router-dom'
+import { Layout } from '../../../components/layout'
 import { useDocument } from 'react-firebase-hooks/firestore'
-import { firestore } from '../../firebase'
-import { PageSpinner } from '../../components/page-spinner'
-import { CommentSection } from '../../components/comment-section'
+import { firestore } from '../../../firebase'
+import { PageSpinner } from '../../../components/page-spinner'
+import { CommentSection } from '../../../components/comment-section'
+import { Button } from 'antd'
 
 export function StoryPage() {
 	const { id }: any = useParams()
@@ -17,7 +18,7 @@ export function StoryPage() {
 	return (
 		<Layout>
 			<PageSpinner loading={isLoading}>
-				<div className="text-center px-32">
+				<div className="text-center px-32 flex flex-col">
 					<h1 className="mt-8 text-xl font-semibold">{story.id}</h1>
 					<h1 className="mt-8 text-xl font-semibold">
 						User: {story.user}
@@ -26,6 +27,9 @@ export function StoryPage() {
 
 					<span className="mt-2 p-4">{story.content}</span>
 
+					<Button className="w-20 mx-auto">
+						<Link to={`/story/${story.id}/update`}>Edit</Link>
+					</Button>
 					<CommentSection story={id} />
 				</div>
 			</PageSpinner>

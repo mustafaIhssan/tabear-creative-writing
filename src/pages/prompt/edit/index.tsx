@@ -1,11 +1,11 @@
 import { useHistory, useParams } from 'react-router-dom'
 import { Button, Form } from 'antd'
-import { PageSpinner } from '../../components/page-spinner'
-import { Layout } from '../../components/layout'
-import { ErrorTag } from '../../components/error-tag'
+import { PageSpinner } from '../../../components/page-spinner'
+import { Layout } from '../../../components/layout'
+import { ErrorTag } from '../../../components/error-tag'
 import { useDocument } from 'react-firebase-hooks/firestore'
-import { firestore } from '../../firebase'
-import { PromptsForm } from '../../components/prompts-form'
+import { firestore } from '../../../firebase'
+import { PromptsForm } from '../../../components/prompts-form'
 import { useState } from 'react'
 
 export function PromptEditPage({}) {
@@ -22,16 +22,9 @@ export function PromptEditPage({}) {
 	const isNew = !id
 
 	const [isUpdating, setIsUpdating] = useState(false)
+	const [isRemoving, setIsRemoving] = useState(false)
 	const [error, setError] = useState(false)
-	// const { storeBaseApi } = useAuth()
-	//
-	// const url = `${storeBaseApi}/products/${id}`
-	//
-	// const { data = {}, isLoading } = useFetch({ url })
-	//
-	// const useEdit = useMutation({ url, method: 'PUT' })
-	// const useRemove = useMutation({ url, method: 'DELETE' })
-	//
+
 	const onSubmit = async () => {
 		setIsUpdating(true)
 		const values = await form.validateFields()
@@ -46,47 +39,11 @@ export function PromptEditPage({}) {
 				history.replace({ pathname: '/prompts' })
 			})
 			.catch((e) => setError(e))
-
-		// 	values.categories = values.categories.map((i) => ({ id: i }))
-		// 	useEdit.mutate(values, {
-		// 		onSuccess: (newData) => {
-		// 			const products = queryClient.getQueryState(
-		// 				`${storeBaseApi}/products`
-		// 			)
-		// 			if (products) {
-		// 				queryClient.setQueryData(
-		// 					`${storeBaseApi}/products`,
-		// 					(oldData) =>
-		// 						oldData.map((i) =>
-		// 							i.id === parseInt(id) ? newData : i
-		// 						)
-		// 				)
-		// 			}
-		//
-		// 			queryClient.setQueryData(
-		// 				`${storeBaseApi}/products/${id}`,
-		// 				newData
-		// 			)
-		//
-		// 		},
-		// 	})
 	}
-	//
+
 	const onRemove = () => {
 		console.log('onRemove')
-		// 	useRemove.mutate(
-		// 		{},
-		// 		{
-		// 			onSuccess: () => {
-		// 				queryClient.setQueryData(
-		// 					`${storeBaseApi}/products`,
-		// 					(oldData = []) =>
-		// 						oldData.filter((i) => i.id !== parseInt(id))
-		// 				)
-		// 				history.replace({ pathname: `/products` })
-		// 			},
-		// 		}
-		// 	)
+		// history.replace({ pathname: '/prompts' })
 	}
 
 	return (
@@ -106,7 +63,7 @@ export function PromptEditPage({}) {
 						{!isNew && (
 							<Button
 								danger
-								// loading={useRemove?.isLoading}
+								loading={isRemoving}
 								onClick={onRemove}
 							>
 								Remove Product
