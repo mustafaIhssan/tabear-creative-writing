@@ -11,8 +11,8 @@ import { useDocument } from 'react-firebase-hooks/firestore'
 import { PageSpinner } from '../../../components/page-spinner'
 
 export function StoryNewPage() {
-	const { promptId }: any = useParams()
 	const { t } = useTranslation()
+	const { promptId }: any = useParams()
 	const history = useHistory()
 	const [form] = Form.useForm()
 
@@ -29,6 +29,7 @@ export function StoryNewPage() {
 
 		values.user = '1234567'
 		values.prompt = prompt.id
+		values.score = 0
 		console.log(values)
 
 		const res = await firestore
@@ -42,10 +43,10 @@ export function StoryNewPage() {
 
 	return (
 		<Layout>
-			<div className="w-full max-w-3xl">
-				{/*<ErrorTag error={error} />*/}
+			<PageSpinner loading={isLoading}>
+				<div className="flex flex-col h-full">
+					{/*<ErrorTag error={error} />*/}
 
-				<PageSpinner loading={isLoading}>
 					<ul className="text-center">
 						<li>Language: {prompt.language}</li>
 						<li className="text-xl my-6">{prompt.content}</li>
@@ -60,20 +61,20 @@ export function StoryNewPage() {
 							))}
 						</div>
 					</ul>
-				</PageSpinner>
 
-				<StoryForm form={form} />
+					<StoryForm form={form} />
 
-				<div className="flex justify-center space-x-2">
-					<Button
-						type="primary"
-						onClick={onSubmit}
-						loading={isSubmitting}
-					>
-						{t('prompt.button.add')}
-					</Button>
+					<div className="flex justify-center space-x-2">
+						<Button
+							type="primary"
+							onClick={onSubmit}
+							loading={isSubmitting}
+						>
+							{t('prompt.button.add')}
+						</Button>
+					</div>
 				</div>
-			</div>
+			</PageSpinner>
 		</Layout>
 	)
 }

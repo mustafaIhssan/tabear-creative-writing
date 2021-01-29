@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react'
+import './styles/fonts.css'
 import { AppRouter } from './app-router'
 import { SecurityProvider } from './security'
 import { ReactQueryDevtools } from 'react-query/devtools'

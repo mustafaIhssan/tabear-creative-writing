@@ -3,21 +3,17 @@ import { Button, Form } from 'antd'
 import { PageSpinner } from '../../../components/page-spinner'
 import { Layout } from '../../../components/layout'
 import { ErrorTag } from '../../../components/error-tag'
-import { useDocument } from 'react-firebase-hooks/firestore'
 import { firestore } from '../../../firebase'
 import { StoryForm } from '../../../components/story-form'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { useStoryById } from '../../../api/story'
 
 export function StoryEditPage({}) {
 	const [form] = Form.useForm()
 	const history = useHistory()
 	const { id }: any = useParams()
-	// const queryClient = useQueryClient()
 
-	const [storySnapShot, isLoading] = useDocument(firestore.doc(`story/${id}`))
-	const story = { ...storySnapShot?.data(), id: storySnapShot?.id }
-
-	const isNew = !id
+	const [story, isLoading] = useStoryById(id)
 
 	const [isUpdating, setIsUpdating] = useState(false)
 	const [isRemoving, setIsRemoving] = useState(false)
@@ -40,15 +36,17 @@ export function StoryEditPage({}) {
 	}
 
 	const onRemove = () => {
+		setIsRemoving(true)
 		console.log('onRemove')
-		// history.replace({ pathname: '/prompts' })
+		setIsRemoving(false)
 	}
 
 	return (
 		<Layout>
 			<PageSpinner loading={isLoading}>
-				<div className="w-full max-w-3xl">
+				<div className="flex flex-col h-full">
 					<ErrorTag error={error} />
+
 					<StoryForm data={story} form={form} />
 					<div className="flex justify-center space-x-2">
 						<Button
@@ -58,15 +56,9 @@ export function StoryEditPage({}) {
 						>
 							Edit Story
 						</Button>
-						{!isNew && (
-							<Button
-								danger
-								loading={isRemoving}
-								onClick={onRemove}
-							>
-								Remove Story
-							</Button>
-						)}
+						<Button danger loading={isRemoving} onClick={onRemove}>
+							Remove Story
+						</Button>
 					</div>
 				</div>
 			</PageSpinner>

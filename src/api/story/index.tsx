@@ -1,5 +1,6 @@
-import { useCollection } from 'react-firebase-hooks/firestore'
+import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
 import { firestore } from '../../firebase'
+import { usePrompt } from '../prompt'
 
 interface useStoryProps {
 	where?: {
@@ -36,4 +37,15 @@ export function useStory(props?: useStoryProps) {
 		}) || []
 
 	return [stories, isPrimaryLoading || isPromptsLoading] as const
+}
+
+export function useStoryById(id: string) {
+	const [storySnapShot, isLoading] = useDocument(firestore.doc(`story/${id}`))
+	const story = { ...storySnapShot?.data(), id: storySnapShot?.id }
+
+	const [prompts, isPromptLoading] = usePrompt()
+
+	story.prompt = prompts?.find((i: any) => i.id === story.prompt)
+
+	return [story, isLoading || isPromptLoading]
 }

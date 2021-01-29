@@ -5,46 +5,51 @@ import { PageSpinner } from '../page-spinner'
 import { useTranslation } from 'react-i18next'
 import { useDocument } from 'react-firebase-hooks/firestore'
 import { firestore } from '../../firebase'
+import { Layout } from '../layout'
 
 export function StoryForm({ form, data }: any) {
 	console.log(data)
 
+	const isEnglish = true
+
 	return (
-		<div>
-			<h1 className="p-4">
-				{!data ? 'Add a new Story' : `Update Story:  ${data.id}`}
-			</h1>
+		<div className="flex flex-col h-full">
+			<div className="text-center">
+				<h1 className="text-xl mx-12">{data.prompt?.content}</h1>
+				<div className="flex justify-center mt-2 space-x-2 ">
+					{data?.prompt?.tags?.map((i: any) => (
+						<span
+							className="p-2 bg-blue-200"
+							key={data?.prompt?.id + i}
+						>
+							{i}
+						</span>
+					))}
+				</div>
+			</div>
 
-			<div className="p-5">
-				<Form
-					name="product-form"
-					labelCol={{ span: 6 }}
-					wrapperCol={{ span: 18 }}
-					form={form}
-					initialValues={data}
-				>
-					<Form.Item
-						rules={rules.input}
-						name="content"
-						label="Story Description"
-					>
-						<Input.TextArea
-							rows={4}
-							placeholder={'Product Description'}
-						/>
-					</Form.Item>
-
-					<Form.Item
-						rules={rules.select}
-						name="score"
-						label="Story Score"
-					>
-						<InputNumber
-							className="w-full"
-							placeholder={'Product Description'}
-						/>
-					</Form.Item>
-				</Form>
+			<div className="flex-grow">
+				<div className="flex flex-col h-full px-10 pt-10">
+					<Form form={form} initialValues={data}>
+						<Form.Item noStyle rules={rules.input} name="content">
+							<Input.TextArea
+								name="fullName"
+								defaultValue={data.content}
+								autoSize={true}
+								style={{
+									height: '90%',
+									lineHeight: '1.65',
+									fontFamily: 'Montserrat',
+									caretColor: 'red',
+									fontSize: '12pt',
+									textAlign: isEnglish ? 'left' : 'right',
+									direction: isEnglish ? 'ltr' : 'rtl',
+								}}
+								className="resize-none focus:outline-none mb-20 w-full text-gray-700 font-bold"
+							/>
+						</Form.Item>
+					</Form>
+				</div>
 			</div>
 		</div>
 	)
