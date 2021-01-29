@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Layout } from '../../components/layout'
-// @ts-expect-error ts-migrate(2305) FIXME: Module '"../../components/prompts-form"' has no ex... Remove this comment to see the full error message
-import { ProductForm, PromptsForm } from '../../components/prompts-form'
+import { PromptsForm } from '../../components/prompts-form'
 import { nanoid } from 'nanoid'
 import { useHistory } from 'react-router-dom'
 

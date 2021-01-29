@@ -1,9 +1,13 @@
 export function strip(text = '') {
 	return text.replace(/<[^>]*>?/gm, '')
 }
+interface errorType {
+	data: {
+		params: object
+	}
+}
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'error' implicitly has an 'any' type.
-export function getError(error) {
+export function getError(error: errorType) {
 	const errors = error?.data?.params
 
 	return errors ? Object.values(errors) : null

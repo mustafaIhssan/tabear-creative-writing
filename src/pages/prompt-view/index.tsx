@@ -10,8 +10,7 @@ import { firestore } from '../../firebase'
 import { UserStory } from './user-story'
 
 export function PromptsViewPage() {
-	// @ts-expect-error ts-migrate(2339) FIXME: Property 'id' does not exist on type '{}'.
-	const { id } = useParams()
+	const { id }: any = useParams()
 
 	const [promptSnapShot, isLoading, error] = useDocument(
 		firestore.doc(`prompt/${id}`)
@@ -22,8 +21,7 @@ export function PromptsViewPage() {
 		firestore.collection('story').where('prompt', '==', id)
 	)
 
-	// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'doc' implicitly has an 'any' type.
-	const stories = storiesSnapshot?.docs?.map((doc) => ({
+	const stories = storiesSnapshot?.docs?.map((doc: any) => ({
 		...doc.data(),
 		id: doc.id,
 	}))
@@ -33,7 +31,6 @@ export function PromptsViewPage() {
 	return (
 		<Layout>
 			{isLoading ? (
-				// @ts-expect-error ts-migrate(2786) FIXME: 'PageSpinner' cannot be used as a JSX component.
 				<PageSpinner />
 			) : (
 				<div className="text-center px-32">
@@ -42,22 +39,19 @@ export function PromptsViewPage() {
 						Language: {prompt.language}
 					</h1>
 
-					{/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'i' implicitly has an 'any' type. */}
-					{prompt.tags.map((i) => (
+					{prompt.tags.map((i: any) => (
 						<span key={i.name}>{i.name}</span>
 					))}
 
 					<h2 className="space-x-8 my-5">
-						{/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'i' implicitly has an 'any' type. */}
-						{prompt.tags.map((i) => (
+						{prompt.tags.map((i: any) => (
 							<span key={i}>{i}</span>
 						))}
 					</h2>
 
 					<span className="mt-2 p-4">{prompt.content}</span>
 
-					{/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'i' implicitly has an 'any' type. */}
-					{stories?.map((i) => (
+					{stories?.map((i: any) => (
 						<UserStory key={i.id} story={i} />
 					))}
 				</div>

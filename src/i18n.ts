@@ -5,9 +5,9 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 
 const Languages = ['en', 'ar']
 
-// @ts-expect-error ts-migrate(2306) FIXME: File '/Users/mustafaihssan/mustafa/tabear-fire/src... Remove this comment to see the full error message
+// @ts-ignore
 import en from './translation/en'
-// @ts-expect-error ts-migrate(2306) FIXME: File '/Users/mustafaihssan/mustafa/tabear-fire/src... Remove this comment to see the full error message
+// @ts-ignore
 import ar from './translation/ar'
 
 i18n.use(Backend)

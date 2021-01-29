@@ -1,4 +1,4 @@
-// @ts-expect-error ts-migrate(1208) FIXME: 'en.ts' cannot be compiled under '--isolatedModule... Remove this comment to see the full error message
+// @ts-ignore
 module.exports = {
 	translation: {
 		title: 'The Title',

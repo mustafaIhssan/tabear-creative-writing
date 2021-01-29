@@ -6,10 +6,8 @@ export function PromptsList({ data }: any) {
 	const { t } = useTranslation()
 	return (
 		<div className="flex flex-col">
-			{!data.length && t('No products yet.')}
-			{/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'item' implicitly has an 'any' type. */}
-			{data.map((item) => (
-				// @ts-expect-error ts-migrate(2786) FIXME: 'PromptsItem' cannot be used as a JSX component.
+			{!data.length && t('No prompts yet.')}
+			{data.map((item: any) => (
 				<PromptsItem key={item.id} {...item} />
 			))}
 		</div>

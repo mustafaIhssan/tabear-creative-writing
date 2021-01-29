@@ -1,4 +1,3 @@
-// TODO: These rules should be form specific and not a global module.
 export const rules = {
 	select: [{ required: true, message: 'Please select an option!' }],
 	input: [{ required: true, message: "It can't be empty!" }],

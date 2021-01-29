@@ -1,8 +1,7 @@
 import React from 'react'
-import { getError } from '../../utils/utils'
 import { Alert } from 'antd'
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import { isEmpty } from 'lodash'
+import { getError } from '../../utils/utils'
 
 export function ErrorTag({ error }: any) {
 	return (
@@ -12,8 +11,7 @@ export function ErrorTag({ error }: any) {
 				description={
 					getError(error) && (
 						<ul>
-							{getError(error)?.map((i) => (
-								// @ts-expect-error ts-migrate(2322) FIXME: Type 'unknown' is not assignable to type 'string |... Remove this comment to see the full error message
+							{getError(error)?.map((i: any) => (
 								<li key={i}>{i}</li>
 							))}
 						</ul>

@@ -4,12 +4,10 @@ import { Layout } from '../../components/layout'
 import { useDocument } from 'react-firebase-hooks/firestore'
 import { firestore } from '../../firebase'
 import { PageSpinner } from '../../components/page-spinner'
-import { UserStory } from '../prompt-view/user-story'
 import { CommentSection } from '../../components/comment-section'
 
 export function StoryPage() {
-	// @ts-expect-error ts-migrate(2339) FIXME: Property 'id' does not exist on type '{}'.
-	const { id } = useParams()
+	const { id }: any = useParams()
 
 	const [storySnapShot, isLoading, error] = useDocument(
 		firestore.doc(`story/${id}`)
@@ -19,7 +17,6 @@ export function StoryPage() {
 	return (
 		<Layout>
 			{isLoading ? (
-				// @ts-expect-error ts-migrate(2786) FIXME: 'PageSpinner' cannot be used as a JSX component.
 				<PageSpinner />
 			) : (
 				<div className="text-center px-32">

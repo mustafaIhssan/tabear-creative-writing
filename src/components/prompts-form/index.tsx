@@ -21,14 +21,12 @@ export function PromptsForm({ form, data }: any) {
 	const [tagsSnapShot, isLoading, error] = useDocument(
 		firestore.collection(`story-tags`)
 	)
-	// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'doc' implicitly has an 'any' type.
-	const tags = tagsSnapShot?.docs?.map((doc) => ({
+	const tags = tagsSnapShot?.docs?.map((doc: any) => ({
 		...doc.data(),
 		id: doc.id,
 	}))
 
 	return isLoading ? (
-		// @ts-expect-error ts-migrate(2786) FIXME: 'PageSpinner' cannot be used as a JSX component.
 		<PageSpinner />
 	) : (
 		<div>
@@ -82,8 +80,7 @@ export function PromptsForm({ form, data }: any) {
 						label="Product Type"
 					>
 						<Select showSearch mode="multiple">
-							{/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'option' implicitly has an 'any' type. */}
-							{tags.map((option) => (
+							{tags.map((option: any) => (
 								<Select.Option
 									key={option.value}
 									value={option.value}

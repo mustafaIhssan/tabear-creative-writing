@@ -7,24 +7,21 @@ export function CommentSection({ story }: any) {
 		firestore.collection('comments').where('story', '==', story)
 	)
 
-	// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'doc' implicitly has an 'any' type.
-	const comments = _comments?.docs?.map((doc) => ({
+	const comments = _comments?.docs?.map((doc: any) => ({
 		...doc.data(),
 		id: doc.id,
 	}))
 
 	return (
 		<div className="m-5">
-			{/* @ts-expect-error ts-migrate(7006) FIXME: Parameter 'i' implicitly has an 'any' type. */}
-			{comments?.map((i) => (
+			{comments?.map((i: any) => (
 				<Comment key={i.id} comment={i} />
 			))}
 		</div>
 	)
 }
 
-// @ts-expect-error ts-migrate(7031) FIXME: Binding element 'comment' implicitly has an 'any' ... Remove this comment to see the full error message
-export function Comment({ comment }) {
+export function Comment({ comment }: any) {
 	return (
 		<div className="flex bg-blue-200 p-5 rounded-lg flex flex-col mb-5">
 			<div className="flex items-center">

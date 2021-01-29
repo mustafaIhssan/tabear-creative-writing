@@ -6,8 +6,11 @@ const DEFAULT_OPTIONS = {
 	delayBetweenWords: 1200,
 }
 
-// @ts-expect-error ts-migrate(7006) FIXME: Parameter 'words' implicitly has an 'any' type.
-export function useTyper(words, enabled = true, options = {}) {
+export function useTyper(
+	words: string | any[],
+	enabled = true,
+	options = {}
+): any {
 	const [charIndex, setCharIndex] = useState(0)
 	const [wordIndex, setWordIndex] = useState(0)
 	const [mode, setMode] = useState('TYPING')
