@@ -7,6 +7,8 @@ import { useDocument } from 'react-firebase-hooks/firestore'
 import { firestore } from '../../firebase'
 
 export function PromptsForm({ form, data }: any) {
+	console.log({ data })
+
 	const { t } = useTranslation()
 
 	const language = [
@@ -26,9 +28,7 @@ export function PromptsForm({ form, data }: any) {
 		<PageSpinner loading={isLoading}>
 			<div>
 				<h1 className="p-4">
-					{!data
-						? 'Add a new product'
-						: `Update Product:  ${data.name}`}
+					{!data ? 'Add a new Prompt' : `Update Prompt:  ${data.id}`}
 				</h1>
 
 				<div className="p-5">
@@ -37,11 +37,7 @@ export function PromptsForm({ form, data }: any) {
 						labelCol={{ span: 6 }}
 						wrapperCol={{ span: 18 }}
 						form={form}
-						// initialValues={{
-						// 	...data,
-						// 	categories: data?.categories?.map(({ id }) => id),
-						// 	description: strip(data?.description),
-						// }}
+						initialValues={data}
 					>
 						<Form.Item
 							rules={rules.input}
@@ -77,7 +73,7 @@ export function PromptsForm({ form, data }: any) {
 							label="Product Type"
 						>
 							<Select showSearch mode="multiple">
-								{tags.map((option: any) => (
+								{tags?.map((option: any) => (
 									<Select.Option
 										key={option.value}
 										value={option.value}
@@ -87,39 +83,6 @@ export function PromptsForm({ form, data }: any) {
 								))}
 							</Select>
 						</Form.Item>
-
-						{/*<Form.Item*/}
-						{/*	rules={rules.input}*/}
-						{/*	name="regular_price"*/}
-						{/*	label="Product Price"*/}
-						{/*>*/}
-						{/*	<Input*/}
-						{/*		placeholder="Product Price"*/}
-						{/*		prefix="$"*/}
-						{/*		suffix="USD"*/}
-						{/*	/>*/}
-						{/*</Form.Item>*/}
-
-						{/*<Form.Item*/}
-						{/*	name="categories"*/}
-						{/*	label="Product Categories"*/}
-						{/*	rules={rules.select}*/}
-						{/*>*/}
-						{/*	<Select*/}
-						{/*		showSearch*/}
-						{/*		placeholder="Product Categories"*/}
-						{/*		mode="multiple"*/}
-						{/*	>*/}
-						{/*		{categories.map((option) => (*/}
-						{/*			<Select.Option*/}
-						{/*				key={option.id}*/}
-						{/*				value={option.id}*/}
-						{/*			>*/}
-						{/*				{option.name}*/}
-						{/*			</Select.Option>*/}
-						{/*		))}*/}
-						{/*	</Select>*/}
-						{/*</Form.Item>*/}
 					</Form>
 				</div>
 			</div>

@@ -10,7 +10,7 @@ import { useAuth } from './security'
 import { LoginPage } from './pages/login'
 import { PromptsPage } from './pages/prompts'
 import { PromptsNewPage } from './pages/prompts-new'
-import { ProductEditPage } from './pages/product-edit'
+import { PromptEditPage } from './pages/prompt-edit'
 import { PromptsViewPage } from './pages/prompt-view'
 import { SingupPage } from './pages/signup'
 import { MainPage } from './pages/main'
@@ -31,12 +31,12 @@ export function AppRouter() {
 					path="/prompts/new"
 					component={PromptsNewPage}
 				/>
+				<PrivateRoute
+					path="/prompts/:id/update"
+					component={PromptEditPage}
+				/>
 				<PrivateRoute path="/prompts/:id" component={PromptsViewPage} />
 				<PrivateRoute path="/story/:id" component={StoryPage} />
-				{/*<PrivateRoute*/}
-				{/*	path="/products/:id/edit"*/}
-				{/*	component={ProductEditPage}*/}
-				{/*/>*/}
 				<PrivateRoute exact path="/prompts" component={PromptsPage} />
 				{/*<Route exact path="/">*/}
 				{/*	<Redirect to={{ pathname: '/private' }} />*/}

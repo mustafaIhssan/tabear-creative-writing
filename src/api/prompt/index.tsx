@@ -12,10 +12,11 @@ export function usePrompt(props?: useStoryProps) {
 		firestore.collection('prompt')
 	)
 
-	const prompts = _prompts?.docs?.map((doc: any) => ({
-		...doc.data(),
-		id: doc.id,
-	}))
+	const prompts =
+		_prompts?.docs?.map((doc: any) => ({
+			...doc.data(),
+			id: doc.id,
+		})) || []
 
 	return [prompts, isPromptsLoading]
 }

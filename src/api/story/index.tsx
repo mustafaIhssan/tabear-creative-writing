@@ -25,14 +25,15 @@ export function useStory(props?: useStoryProps) {
 		id: doc.id,
 	}))
 
-	const stories = _stories?.docs?.map((doc: any) => {
-		const data = doc.data()
-		return {
-			...data,
-			prompt: prompts?.find((i: any) => i.id === data.prompt),
-			id: doc.id,
-		}
-	})
+	const stories =
+		_stories?.docs?.map((doc: any) => {
+			const data = doc.data()
+			return {
+				...data,
+				prompt: prompts?.find((i: any) => i.id === data.prompt),
+				id: doc.id,
+			}
+		}) || []
 
 	return [stories, isPrimaryLoading || isPromptsLoading] as const
 }
