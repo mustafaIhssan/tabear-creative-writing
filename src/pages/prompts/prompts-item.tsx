@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Button } from 'antd'
+import { IconTag } from '../../components/icon-tag'
 
 interface Props {
 	language: string
@@ -19,7 +19,7 @@ export function PromptsItem(item: Props) {
 	)
 
 	return (
-		<div className="bg-gray-100 text-center px-5 py-8 m-5 rounded-lg shadow">
+		<div className="card">
 			<div className="space-x-2 m-5">
 				{item.tags?.map((i) => (
 					<span className="p-2 rounded bg-blue-200" key={item.id + i}>
@@ -59,43 +59,14 @@ export function PromptsItem(item: Props) {
 			</div>
 
 			<div className="flex border-t p-3">
-				<Link to={`/prompts/${item.id}`}>
-					<div className="flex rounded-lg space-x-2 p-3 hover:bg-blue-100 hover:text-blue-700 text-gray-700">
-						<svg
-							className="w-6 h-6 text-gray-500"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth="2"
-								d="M5 11l7-7 7 7M5 19l7-7 7 7"
-							/>
-						</svg>
-						<span>25 Like</span>
-					</div>
-				</Link>
+				<IconTag text="25 Like" icon="M5 11l7-7 7 7M5 19l7-7 7 7" />
 
-				<div className="flex rounded-lg space-x-2 p-3 hover:bg-blue-100 hover:text-blue-700 text-gray-700">
-					<svg
-						className="w-6 h-6 text-gray-500"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							strokeWidth="2"
-							d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
-						/>
-					</svg>
-					<span>6 Post</span>
-				</div>
+				<Link to={`/prompts/${item.id}`}>
+					<IconTag
+						text="6 Posts"
+						icon="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
+					/>
+				</Link>
 			</div>
 		</div>
 	)
