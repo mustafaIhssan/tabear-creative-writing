@@ -41,12 +41,17 @@ export function LoginPage() {
 							showIcon
 						/>
 					)}
-					<div>
-						<pre>login</pre>
+					<div className="text-5xl mb-10 text-center">
+						Creative<strong>Tabear</strong>
 					</div>
-					<div className="text-center p-5">
+					<div
+						className="text-center p-5 mx-auto"
+						style={{ width: '500px' }}
+					>
 						<Form
 							name="login"
+							labelCol={{ span: 8 }}
+							wrapperCol={{ span: 20 }}
 							onFinish={onFinish}
 							onFinishFailed={onFinishFailed}
 						>
