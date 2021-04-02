@@ -1,34 +1,55 @@
 import { Link } from 'react-router-dom'
 import { IconTag } from '../../components/icon-tag'
+import React from 'react'
 
 interface Props {
 	language: string
 	content: string
 	id: string
 	tags: string[]
+	user?: string
 }
 
 const getRandRange = () => Math.floor(Math.random() * 100)
 
 export function PromptsItem(item: Props) {
 	const tempImages = [...Array(3).fill(0)].map(
-		(i) =>
+		(_, i) =>
 			`https://randomuser.me/api/portraits/${
 				i % 2 === 0 ? 'men' : 'women'
 			}/${getRandRange()}.jpg`
 	)
 
+	const tags = [...(item.tags || []), item.language]
+
 	return (
 		<div className="card">
-			<div className="space-x-2 m-5">
-				{item.tags?.map((i) => (
-					<span className="p-2 rounded bg-blue-200" key={item.id + i}>
-						{i.toUpperCase()}
-					</span>
-				))}
-				<span className="p-2 bg-blue-200">
-					{item.language.toUpperCase()}
-				</span>
+			<div className="flex space-x-4 items-center px-5">
+				<div>
+					<img
+						src={tempImages[1]}
+						alt="user.name"
+						width="64"
+						height="64"
+						className="w-15 h-15 rounded-full"
+					/>
+				</div>
+				<div className="text-left">
+					<div className="text-xl leading-6 font-medium text-gray-900 w-full">
+						{item?.user || 'NAME'}
+					</div>
+					<div className="text-gray-500">5 min ago</div>
+					<div className="space-x-2 mt-2">
+						{tags?.map((i: any) => (
+							<span
+								className="p-1 rounded bg-blue-200"
+								key={item.id + i}
+							>
+								{i.toUpperCase()}
+							</span>
+						))}
+					</div>
+				</div>
 			</div>
 
 			<p

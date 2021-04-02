@@ -13,23 +13,9 @@ export function UserStory({ story }: any) {
 			}/${getRandRange()}.jpg`
 	)
 
-	console.log(story)
+	const tags = [...story?.prompt?.tags, story.prompt?.language]
 	return (
 		<div className="card">
-			{/*<div className="space-x-2 m-5">*/}
-			{/*	{story.tags?.map((i: any) => (*/}
-			{/*		<span*/}
-			{/*			className="p-2 rounded bg-blue-200"*/}
-			{/*			key={story.id + i}*/}
-			{/*		>*/}
-			{/*			{i.toUpperCase()}*/}
-			{/*		</span>*/}
-			{/*	))}*/}
-			{/*	<span className="p-2 bg-blue-200">*/}
-			{/*		{story.language.toUpperCase()}*/}
-			{/*	</span>*/}
-			{/*</div>*/}
-
 			<div className="flex space-x-4 items-center px-5">
 				<div>
 					<img
@@ -45,6 +31,16 @@ export function UserStory({ story }: any) {
 						{story.user}
 					</div>
 					<div className="text-gray-500">5 min ago</div>
+					<div className="space-x-2 mt-2">
+						{tags?.map((i: any) => (
+							<span
+								className="p-1 rounded bg-blue-200"
+								key={story.id + i}
+							>
+								{i.toUpperCase()}
+							</span>
+						))}
+					</div>
 				</div>
 			</div>
 
