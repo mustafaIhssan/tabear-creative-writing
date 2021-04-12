@@ -1,6 +1,6 @@
-import React from 'react'
 import { Alert } from 'antd'
 import { isEmpty } from 'lodash'
+
 import { getError } from '../../utils/utils'
 
 export function ErrorTag({ error }: any) {
@@ -19,5 +19,7 @@ export function ErrorTag({ error }: any) {
 			type="error"
 			showIcon
 		/>
-	) : null
+	) : (
+		<div />
+	)
 }

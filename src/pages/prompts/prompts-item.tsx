@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
+
 import { IconTag } from '../../components/icon-tag'
-import React from 'react'
 
 interface Props {
 	language: string
@@ -13,7 +13,7 @@ interface Props {
 const getRandRange = () => Math.floor(Math.random() * 100)
 
 export function PromptsItem(item: Props) {
-	const tempImages = [...Array(3).fill(0)].map(
+	const tempImages = [...Array.from({ length: 3 }).fill(0)].map(
 		(_, i) =>
 			`https://randomuser.me/api/portraits/${
 				i % 2 === 0 ? 'men' : 'women'
@@ -41,10 +41,7 @@ export function PromptsItem(item: Props) {
 					<div className="text-gray-500">5 min ago</div>
 					<div className="space-x-2 mt-2">
 						{tags?.map((i: any) => (
-							<span
-								className="p-1 rounded bg-blue-200"
-								key={item.id + i}
-							>
+							<span className="p-1 rounded bg-blue-200" key={item.id + i}>
 								{i.toUpperCase()}
 							</span>
 						))}

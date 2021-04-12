@@ -1,7 +1,9 @@
-import firebase from 'firebase'
+// import firebase from 'firebase'
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
+
 import { firestore } from '../../firebase'
-import { usePrompt } from '../prompt'
+
+// import { usePrompt } from '../prompt'
 
 interface useStoryProps {
 	where?: {
@@ -17,8 +19,6 @@ export function useStory(props?: useStoryProps) {
 					.where(props.where.field, '==', props.where.id)
 			: firestore.collection('story')
 	)
-
-	console.log(_stories, isPrimaryLoading)
 
 	const [_prompts, isPromptsLoading] = useCollection(
 		firestore.collection('prompt')
@@ -43,8 +43,12 @@ export function useStory(props?: useStoryProps) {
 }
 
 export function useStoryById(id: string) {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	const [storySnapShot, isLoading] = useDocument(firestore.doc(`story/${id}`))
 
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	const story = { ...storySnapShot?.data(), id: storySnapShot?.id }
 
 	// const [prompts, isPromptLoading] = usePrompt()

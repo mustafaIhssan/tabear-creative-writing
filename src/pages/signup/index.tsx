@@ -1,20 +1,21 @@
-import React, { useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
 import { Alert, Button, Form, Input } from 'antd'
+import { useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
+
+import { Layout } from '../../components/layout'
 import { useAuth } from '../../security'
 import { rules } from '../../utils/rules'
-import { Layout } from '../../components/layout'
 
 export function SingupPage() {
 	const { singup, loading }: any = useAuth()
 
 	const history = useHistory()
 	const location = useLocation()
-	const [error, setError] = useState(null)
+	const [error, setError] = useState()
 
 	const { from }: any = location.state || { from: { pathname: '/' } }
 
-	const onFinish = async (values: object) => {
+	const onFinish = async (values: Record<string, unknown>) => {
 		const { isSuccess, data } = await singup(values)
 
 		console.log({ data })
@@ -56,6 +57,7 @@ export function SingupPage() {
 							<Form.Item
 								label="Email"
 								name="email"
+								// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 								// @ts-ignore
 								rules={rules.email}
 							>
@@ -77,11 +79,7 @@ export function SingupPage() {
 									...rules.password,
 									({ getFieldValue }) => ({
 										validator(_, value) {
-											if (
-												!value ||
-												getFieldValue('password') ===
-													value
-											) {
+											if (!value || getFieldValue('password') === value) {
 												return Promise.resolve()
 											}
 
@@ -96,11 +94,7 @@ export function SingupPage() {
 							</Form.Item>
 
 							<Form.Item>
-								<Button
-									type="primary"
-									loading={loading}
-									htmlType="submit"
-								>
+								<Button type="primary" loading={loading} htmlType="submit">
 									Sign Up
 								</Button>
 							</Form.Item>

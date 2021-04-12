@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import { useInterval } from '../use-interval'
 
 const DEFAULT_OPTIONS = {
@@ -6,6 +7,7 @@ const DEFAULT_OPTIONS = {
 	delayBetweenWords: 1200,
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export function useTyper(
 	words: string | any[],
 	enabled = true,
@@ -19,13 +21,12 @@ export function useTyper(
 
 	// measure how many characters' worth of waiting you need to wait between words
 	const delayInCharacters =
-		populatedOptions.delayBetweenWords /
-		populatedOptions.delayBetweenCharacters
+		populatedOptions.delayBetweenWords / populatedOptions.delayBetweenCharacters
 
 	useInterval(
 		() => {
 			// disable the animation to save render cycles if it's not needed
-			if (enabled && words && words.length) {
+			if (enabled && words && words.length > 0) {
 				// wait extra characters between words to emulate a pause between words without extra logic
 				// `charIndex > word.length` is not a problem for substr :)
 				if (
@@ -41,8 +42,7 @@ export function useTyper(
 				} else {
 					// Pick any word except the current one
 					setWordIndex(
-						(wordIndex +
-							Math.ceil(Math.random() * (words.length - 1))) %
+						(wordIndex + Math.ceil(Math.random() * (words.length - 1))) %
 							words.length
 					)
 					setMode('TYPING')
@@ -54,8 +54,8 @@ export function useTyper(
 			: populatedOptions.delayBetweenCharacters / 3
 	)
 
-	if (words && words.length) {
-		return words[wordIndex].substr(0, charIndex)
+	if (words && words.length > 0) {
+		return words[wordIndex].slice(0, Math.max(0, charIndex))
 	}
 
 	return ''

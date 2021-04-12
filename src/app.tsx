@@ -1,10 +1,12 @@
-import React, { Suspense } from 'react'
 import './styles/fonts.css'
-import { AppRouter } from './app-router'
-import { SecurityProvider } from './security'
-import { ReactQueryDevtools } from 'react-query/devtools'
+
+import { Suspense } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+
+import { AppRouter } from './app-router'
 import { PageSpinner } from './components/page-spinner'
+import { SecurityProvider } from './security'
 
 export function App() {
 	const queryClient = new QueryClient()

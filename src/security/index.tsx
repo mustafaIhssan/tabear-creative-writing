@@ -1,13 +1,14 @@
-import { createContext, useEffect, useState, useContext } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import useLocalStorageState from 'use-local-storage-state'
+
 import { auth } from '../firebase'
 
 const LOCAL_STORAGE_USR = 'userData'
 const SECURITY_CONTEXT_DEFAULT = {
-	login: () => undefined,
-	logout: () => undefined,
+	login: () => 0,
+	logout: () => 0,
 	user: {},
-	accessToken: null,
+	accessToken: undefined,
 	isAuthenticated: false,
 }
 const SecurityContext = createContext(SECURITY_CONTEXT_DEFAULT)
@@ -21,33 +22,30 @@ export const SecurityProvider = ({ children }: any) => {
 	async function singup({ email, password }: any) {
 		setLoading(true)
 		try {
-			const newUser = await auth.createUserWithEmailAndPassword(
-				email,
-				password
-			)
+			const newUser = await auth.createUserWithEmailAndPassword(email, password)
 
 			return { isSuccess: true, data: newUser }
-		} catch (e) {
-			console.log(e)
+		} catch (error) {
+			// eslint-disable-next-line no-console
+			console.log(error)
 			setLoading(false)
-			return { isSuccess: false, data: e }
+			return { isSuccess: false, data: error }
 		}
 	}
 
 	async function login({ email, password }: any) {
 		try {
-			const newUser = await auth.signInWithEmailAndPassword(
-				email,
-				password
-			)
+			const newUser = await auth.signInWithEmailAndPassword(email, password)
 
 			return { isSuccess: true, data: newUser }
-		} catch (e) {
-			console.log(e)
-			return { isSuccess: false, data: e }
+		} catch (error) {
+			// eslint-disable-next-line no-console
+			console.log(error)
+			return { isSuccess: false, data: error }
 		}
 	}
 
+	// eslint-disable-next-line unicorn/consistent-function-scoping
 	function logout() {
 		return auth.signOut()
 	}
@@ -55,6 +53,7 @@ export const SecurityProvider = ({ children }: any) => {
 	useEffect(() => {
 		setLoading(true)
 		const unsubscribe = auth.onAuthStateChanged((newUser) => {
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			setUser(newUser)
 		})
@@ -70,8 +69,10 @@ export const SecurityProvider = ({ children }: any) => {
 				isAuthenticated: !!user,
 				singup,
 				loading,
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
 				login,
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
 				logout,
 			}}

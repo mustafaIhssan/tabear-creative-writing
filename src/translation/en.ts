@@ -1,5 +1,4 @@
-// @ts-ignore
-module.exports = {
+export default {
 	translation: {
 		title: 'The Title',
 		subTitle: 'The Subtitle',

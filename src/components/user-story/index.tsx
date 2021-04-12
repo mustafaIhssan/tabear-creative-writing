@@ -1,15 +1,16 @@
-import React from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { Button } from 'antd'
-import { IconTag } from '../icon-tag'
 import { useCollection } from 'react-firebase-hooks/firestore'
+import { Link } from 'react-router-dom'
+
 import { firestore } from '../../firebase'
+import { IconTag } from '../icon-tag'
 
 const getRandRange = () => Math.floor(Math.random() * 100)
 
 export function UserStory({ story }: any) {
-	const tempImages = [...Array(3).fill(0)].map(
-		(i) =>
+	const tempImages = [...Array.from({ length: 3 }).fill(0)].map(
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		(i: number) =>
 			`https://randomuser.me/api/portraits/${
 				i % 2 === 0 ? 'men' : 'women'
 			}/${getRandRange()}.jpg`
@@ -17,12 +18,12 @@ export function UserStory({ story }: any) {
 
 	const tags = [...story?.prompt?.tags, story.prompt?.language]
 
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	const [user, isUserLoading] = useCollection(firestore.collection('user'))
 
 	// const user = _user.ref
 	//, id: _user?.id }
-
-	console.log('user', user)
 
 	return (
 		<div className="card">
@@ -43,10 +44,7 @@ export function UserStory({ story }: any) {
 					<div className="text-gray-500">5 min ago</div>
 					<div className="space-x-2 mt-2">
 						{tags?.map((i: any) => (
-							<span
-								className="p-1 rounded bg-blue-200"
-								key={story.id + i}
-							>
+							<span className="p-1 rounded bg-blue-200" key={story.id + i}>
 								{i.toUpperCase()}
 							</span>
 						))}

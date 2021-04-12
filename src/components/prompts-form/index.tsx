@@ -1,10 +1,9 @@
-import React from 'react'
-import { Form, Input, Select } from 'antd'
-import { rules } from '../../utils/rules'
-import { PageSpinner } from '../page-spinner'
-import { useTranslation } from 'react-i18next'
-import { useDocument } from 'react-firebase-hooks/firestore'
-import { firestore } from '../../firebase'
+// import { Form, Input, Select } from 'antd'
+// import { rules } from '../../utils/rules'
+// import { PageSpinner } from '../page-spinner'
+// import { useTranslation } from 'react-i18next'
+// import { useDocument } from 'react-firebase-hooks/firestore'
+// import { firestore } from '../../firebase'
 
 export function PromptsForm({ form, data }: any) {
 	return <div>d</div>

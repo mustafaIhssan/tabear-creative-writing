@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import { Button, Form } from 'antd'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
+// import { useHistory } from 'react-router-dom'
 import { Layout } from '../../../components/layout'
 import { PromptsForm } from '../../../components/prompts-form'
-import { useHistory } from 'react-router-dom'
-
-import { Button, Form } from 'antd'
-import { useTranslation } from 'react-i18next'
 
 export function PromptsNewPage() {
 	const { t } = useTranslation()
-	const history = useHistory()
+	// const history = useHistory()
 	const [form] = Form.useForm()
 
 	const [isLoading, setIsLoading] = useState(false)
@@ -43,11 +43,7 @@ export function PromptsNewPage() {
 				<PromptsForm form={form} />
 
 				<div className="flex justify-center space-x-2">
-					<Button
-						type="primary"
-						onClick={onSubmit}
-						loading={isLoading}
-					>
+					<Button type="primary" onClick={onSubmit} loading={isLoading}>
 						{t('prompt.button.add')}
 					</Button>
 				</div>
