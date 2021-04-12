@@ -2,6 +2,8 @@ import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Button } from 'antd'
 import { IconTag } from '../icon-tag'
+import { useCollection } from 'react-firebase-hooks/firestore'
+import { firestore } from '../../firebase'
 
 const getRandRange = () => Math.floor(Math.random() * 100)
 
@@ -14,6 +16,14 @@ export function UserStory({ story }: any) {
 	)
 
 	const tags = [...story?.prompt?.tags, story.prompt?.language]
+
+	const [user, isUserLoading] = useCollection(firestore.collection('user'))
+
+	// const user = _user.ref
+	//, id: _user?.id }
+
+	console.log('user', user)
+
 	return (
 		<div className="card">
 			<div className="flex space-x-4 items-center px-5">
