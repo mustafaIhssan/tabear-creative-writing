@@ -1,14 +1,19 @@
+import decode from 'jwt-decode'
+import { attempt, isError } from 'lodash'
 import { createContext, useContext, useEffect, useState } from 'react'
 import useLocalStorageState from 'use-local-storage-state'
 
-import { auth } from '../firebase'
+import { handelRequests } from '../api/api-wrapper'
+import { SERVER_URL } from '../config.json'
 
+const LOCAL_STORAGE_KEY = 'accessToken'
 const LOCAL_STORAGE_USR = 'userData'
+
 const SECURITY_CONTEXT_DEFAULT = {
 	login: () => 0,
 	logout: () => 0,
 	user: {},
-	accessToken: undefined,
+	accessToken: '',
 	isAuthenticated: false,
 }
 const SecurityContext = createContext(SECURITY_CONTEXT_DEFAULT)
@@ -16,59 +21,74 @@ const SecurityContext = createContext(SECURITY_CONTEXT_DEFAULT)
 export const useAuth = () => useContext(SecurityContext)
 
 export const SecurityProvider = ({ children }: any) => {
+	const [isReady, setIsReady] = useState(false)
+	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [user, setUser] = useLocalStorageState(LOCAL_STORAGE_USR, {})
-	const [loading, setLoading] = useState(false)
-
-	async function singup({ email, password }: any) {
-		setLoading(true)
-		try {
-			const newUser = await auth.createUserWithEmailAndPassword(email, password)
-
-			return { isSuccess: true, data: newUser }
-		} catch (error) {
-			// eslint-disable-next-line no-console
-			console.log(error)
-			setLoading(false)
-			return { isSuccess: false, data: error }
-		}
-	}
-
-	async function login({ email, password }: any) {
-		try {
-			const newUser = await auth.signInWithEmailAndPassword(email, password)
-
-			return { isSuccess: true, data: newUser }
-		} catch (error) {
-			// eslint-disable-next-line no-console
-			console.log(error)
-			return { isSuccess: false, data: error }
-		}
-	}
-
-	// eslint-disable-next-line unicorn/consistent-function-scoping
-	function logout() {
-		return auth.signOut()
-	}
+	const [accessToken, setAccessToken] = useLocalStorageState(
+		LOCAL_STORAGE_KEY,
+		''
+	)
+	const [isLoading, setIsLoading] = useState(false)
 
 	useEffect(() => {
-		setLoading(true)
-		const unsubscribe = auth.onAuthStateChanged((newUser) => {
+		const token = attempt(() => decode(accessToken))
+		let newIsAuthenticated = false
+		console.log(token, accessToken)
+
+		if (!isError(token)) {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
-			setUser(newUser)
-		})
+			const expiresAt = token.exp * 1000
+			newIsAuthenticated = Date.now() < expiresAt
+		}
+		setIsAuthenticated(newIsAuthenticated)
+		setIsReady(true)
+	}, [accessToken])
 
-		setLoading(false)
-		return unsubscribe
-	}, [])
+	async function login(userInfo: Record<string, unknown>) {
+		setIsLoading(true)
+		try {
+			const data = await handelRequests({
+				method: 'POST',
+				url: `${SERVER_URL}/auth/local`,
+				data: userInfo,
+			})
+
+			setIsLoading(false)
+			if (!data.jwt) {
+				return { isSuccess: false, data }
+			}
+
+			console.log(data)
+			setAccessToken(data.jwt)
+			setUser(data.user)
+
+			return { isSuccess: true, data }
+		} catch (error) {
+			console.error(error)
+			setIsLoading(false)
+			return { isSuccess: false, data: error }
+		}
+	}
+
+	function logout() {
+		setIsAuthenticated(false)
+		setAccessToken('')
+		setUser({})
+		localStorage.removeItem('accessToken')
+	}
+
+	if (!isReady) {
+		return null
+	}
 
 	return (
 		<SecurityContext.Provider
 			value={{
 				user,
-				isAuthenticated: !!user,
-				singup,
-				loading,
+				isAuthenticated,
+				accessToken,
+				isLoading,
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
 				login,

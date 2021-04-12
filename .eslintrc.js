@@ -29,6 +29,7 @@ module.exports = {
 		'plugin:react-hooks/recommended',
 	],
 	rules: {
+		'unicorn/no-null': 'off',
 		'no-unused-vars': 'off',
 		'@typescript-eslint/no-unused-vars': 'off',
 		'unicorn/consistent-function-scoping': 'off',

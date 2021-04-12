@@ -7,7 +7,7 @@ import { useAuth } from '../../security'
 import { rules } from '../../utils/rules'
 
 export function LoginPage() {
-	const { login, loading }: any = useAuth()
+	const { login, isLoading }: any = useAuth()
 
 	const history = useHistory()
 	const location = useLocation()
@@ -25,20 +25,20 @@ export function LoginPage() {
 		}
 	}
 
-	// eslint-disable-next-line unicorn/consistent-function-scoping
-	const onFinishFailed = (errorInfo: Record<string, unknown>) =>
-		// eslint-disable-next-line no-console
-		console.log('Failed:', errorInfo)
-
 	return (
 		<Layout>
 			<div className="h-full flex items-center justify-center">
 				<div>
 					{error && (
 						<Alert
+							// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+							// @ts-ignore
+							key={error?.[0]?.messages[0].message}
 							message="Error"
 							className="mb-8"
-							description={error}
+							// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+							// @ts-ignore
+							description={error?.[0]?.messages[0].message}
 							type="error"
 							showIcon
 						/>
@@ -52,13 +52,10 @@ export function LoginPage() {
 							labelCol={{ span: 8 }}
 							wrapperCol={{ span: 20 }}
 							onFinish={onFinish}
-							// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-							// @ts-ignore
-							onFinishFailed={onFinishFailed}
 						>
 							<Form.Item
 								label="Email"
-								name="email"
+								name="identifier"
 								// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 								// @ts-ignore
 								rules={rules.email}
@@ -76,7 +73,7 @@ export function LoginPage() {
 								<Checkbox>Remember me</Checkbox>
 							</Form.Item>
 							<Form.Item>
-								<Button type="primary" loading={loading} htmlType="submit">
+								<Button type="primary" loading={isLoading} htmlType="submit">
 									Submit
 								</Button>
 							</Form.Item>
