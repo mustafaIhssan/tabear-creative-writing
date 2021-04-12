@@ -8,26 +8,28 @@ import { PromptsItem } from '../prompts/prompts-item'
 
 export function MainPage() {
 	const [stories, isStoryLoading] = useStory()
-	const [prompts, isPromptLoading] = usePrompt()
+	console.log(stories)
+	// const [prompts, isPromptLoading] = usePrompt()
 
-	const isLoading = isStoryLoading && isPromptLoading
+	// const isLoading = isStoryLoading && isPromptLoading
 
+	const isLoading = false
 	return (
 		<Layout>
 			<PageSpinner loading={isLoading}>
 				<div className="flex">
-					<div className="flex-1">
-						<h1>Latest Stories</h1>
-						{stories.map((i: any) => (
-							<UserStory key={i.id} story={i} />
-						))}
-					</div>
-					<div className="flex-1">
-						<h1>Latest Prompts</h1>
-						{prompts.map((item: any) => (
-							<PromptsItem key={item.id} {...item} />
-						))}
-					</div>
+					{/*<div className="flex-1">*/}
+					{/*	<h1>Latest Stories</h1>*/}
+					{/*	{[{ id: 123 }].map((i: any) => (*/}
+					{/*		<UserStory key={i.id} story={i} />*/}
+					{/*	))}*/}
+					{/*</div>*/}
+					{/*<div className="flex-1">*/}
+					{/*	<h1>Latest Prompts</h1>*/}
+					{/*	{prompts.map((item: any) => (*/}
+					{/*		<PromptsItem key={item.id} {...item} />*/}
+					{/*	))}*/}
+					{/*</div>*/}
 				</div>
 			</PageSpinner>
 		</Layout>
