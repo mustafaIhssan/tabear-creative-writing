@@ -33,7 +33,6 @@ export const SecurityProvider = ({ children }: any) => {
 	useEffect(() => {
 		const token = attempt(() => decode(accessToken))
 		let newIsAuthenticated = false
-		console.log(token, accessToken)
 
 		if (!isError(token)) {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -59,13 +58,37 @@ export const SecurityProvider = ({ children }: any) => {
 				return { isSuccess: false, data }
 			}
 
-			console.log(data)
 			setAccessToken(data.jwt)
 			setUser(data.user)
 
 			return { isSuccess: true, data }
 		} catch (error) {
-			console.error(error)
+			setIsLoading(false)
+			return { isSuccess: false, data: error }
+		}
+	}
+
+	async function singup(userInfo: Record<string, unknown>) {
+		userInfo.username = userInfo.email
+
+		setIsLoading(true)
+		try {
+			const data = await handelRequests({
+				method: 'POST',
+				url: `${SERVER_URL}/auth/local/register`,
+				data: userInfo,
+			})
+
+			setIsLoading(false)
+			if (!data.jwt) {
+				return { isSuccess: false, data }
+			}
+
+			setAccessToken(data.jwt)
+			setUser(data.user)
+
+			return { isSuccess: true, data }
+		} catch (error) {
 			setIsLoading(false)
 			return { isSuccess: false, data: error }
 		}
@@ -76,6 +99,7 @@ export const SecurityProvider = ({ children }: any) => {
 		setAccessToken('')
 		setUser({})
 		localStorage.removeItem('accessToken')
+		localStorage.clear()
 	}
 
 	if (!isReady) {
@@ -95,6 +119,7 @@ export const SecurityProvider = ({ children }: any) => {
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
 				logout,
+				singup,
 			}}
 		>
 			{children}

@@ -6,7 +6,7 @@ interface Props {
 	language: string
 	content: string
 	id: string
-	tags: string[]
+	tags: string
 	user?: string
 }
 
@@ -20,7 +20,7 @@ export function PromptsItem(item: Props) {
 			}/${getRandRange()}.jpg`
 	)
 
-	const tags = [...(item.tags || []), item.language]
+	const tags = [...(JSON.parse(item.tags) || []), item.language]
 
 	return (
 		<div className="card">

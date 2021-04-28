@@ -30,6 +30,7 @@ module.exports = {
 	],
 	rules: {
 		'unicorn/no-null': 'off',
+		'@typescript-eslint/explicit-module-boundary-types': 'off',
 		'no-unused-vars': 'off',
 		'@typescript-eslint/no-unused-vars': 'off',
 		'unicorn/consistent-function-scoping': 'off',

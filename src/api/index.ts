@@ -18,8 +18,8 @@ function getFullUrl(url: string) {
 
 interface fetchType {
 	url: string
-	queryKey: string
-	map(data: Record<string, unknown>[]): Record<string, unknown>[]
+	queryKey?: string
+	map?(data: Record<string, unknown>[]): Record<string, unknown>[]
 }
 export function useFetch({
 	url,

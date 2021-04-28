@@ -33,17 +33,24 @@ export function SingupPage() {
 	return (
 		<Layout>
 			<div className="h-full flex items-center justify-center">
-				<div className="">
+				<div>
 					{error && (
 						<Alert
+							// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+							// @ts-ignore
+							key={error?.[0]?.messages[0].message}
 							message="Error"
 							className="mb-8"
-							description={error}
+							// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+							// @ts-ignore
+							description={error?.[0]?.messages[0].message}
 							type="error"
 							showIcon
 						/>
 					)}
-
+					<div className="text-5xl mb-10 text-center">
+						Creative<strong>Tabear</strong>
+					</div>
 					<div>
 						<pre>sign-up</pre>
 					</div>

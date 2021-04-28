@@ -1,7 +1,5 @@
-import { useCollection } from 'react-firebase-hooks/firestore'
 import { Link } from 'react-router-dom'
 
-import { firestore } from '../../firebase'
 import { IconTag } from '../icon-tag'
 
 const getRandRange = () => Math.floor(Math.random() * 100)
@@ -17,13 +15,6 @@ export function UserStory({ story }: any) {
 	)
 
 	const tags = [...story?.prompt?.tags, story.prompt?.language]
-
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	const [user, isUserLoading] = useCollection(firestore.collection('user'))
-
-	// const user = _user.ref
-	//, id: _user?.id }
 
 	return (
 		<div className="card">

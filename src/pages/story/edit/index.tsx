@@ -2,7 +2,6 @@ import { Button, Form } from 'antd'
 import { useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
-import { useStoryById } from '../../../api/story'
 import { ErrorTag } from '../../../components/error-tag'
 import { Layout } from '../../../components/layout'
 import { PageSpinner } from '../../../components/page-spinner'
@@ -14,7 +13,8 @@ export function StoryEditPage() {
 	const history = useHistory()
 	const { id }: any = useParams()
 
-	const [story, isLoading] = useStoryById(id)
+	// const [story, isLoading] = useStoryById(id)
+	const [story, isLoading] = [{}, false]
 
 	const [isUpdating, setIsUpdating] = useState(false)
 	const [isRemoving, setIsRemoving] = useState(false)
