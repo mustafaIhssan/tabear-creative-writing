@@ -12,6 +12,7 @@ import { Stories } from './stories'
 //   px-4 py-2 text-sm
 //   font-medium leading-5 text-white
 //   rounded-md w-64 mt-5
+//
 // `)
 
 export function MainPage() {
