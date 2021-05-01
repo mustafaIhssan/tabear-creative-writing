@@ -1,8 +1,10 @@
-import React from 'react'
 import { useCollection } from 'react-firebase-hooks/firestore'
+
 import { firestore } from '../../firebase'
 
 export function CommentSection({ story }: any) {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	const [_comments, isLoading] = useCollection(
 		firestore.collection('comments').where('story', '==', story)
 	)

@@ -3,12 +3,12 @@ export function strip(text = '') {
 }
 interface errorType {
 	data: {
-		params: object
+		params: Record<string, unknown>
 	}
 }
 
 export function getError(error: errorType) {
 	const errors = error?.data?.params
 
-	return errors ? Object.values(errors) : null
+	return errors ? Object.values(errors) : []
 }

@@ -1,14 +1,12 @@
-import React from 'react'
-import { Layout } from '../../components/layout'
 import { useCollection } from 'react-firebase-hooks/firestore'
-import { firestore } from '../../firebase'
+
+import { Layout } from '../../components/layout'
 import { PageSpinner } from '../../components/page-spinner'
+import { firestore } from '../../firebase'
 import { PromptsList } from './prompts-list'
 
 export function PromptsPage() {
-	const [data, isLoading, error] = useCollection(
-		firestore.collection('prompt')
-	)
+	const [data, isLoading, error] = useCollection(firestore.collection('prompt'))
 
 	const prompts = data?.docs?.map((doc: any) => ({
 		...doc.data(),

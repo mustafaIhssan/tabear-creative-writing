@@ -1,10 +1,10 @@
-import React from 'react'
-import { Logo } from '../logo'
+import { Button, Space } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { Button, Space } from 'antd'
-import { useAuth } from '../../security'
+
 import { useTyper } from '../../hooks/use-typer'
+import { useAuth } from '../../security'
+import { Logo } from '../logo'
 
 export function Header() {
 	const { t } = useTranslation()
@@ -32,17 +32,13 @@ export function Header() {
 								{t('system.logout')}
 							</Button>
 							<Link key="add-product" to="/prompts/new">
-								<Button type="primary">
-									{t('prompt.add')}
-								</Button>
+								<Button type="primary">{t('prompt.add')}</Button>
 							</Link>
 						</>
 					) : (
 						<>
 							<Link key="sing-up" to="/singup">
-								<Button type="primary">
-									{t('system.signup')}
-								</Button>
+								<Button type="primary">{t('system.signup')}</Button>
 							</Link>
 							<Link key="sign-in" to="/login">
 								<Button>{t('system.signin')}</Button>

@@ -1,3 +1,4 @@
 {
-  "SERVER_URL": "https://quadragon.xyz"
+	"SERVER_URL": "https://tabear-strapi.herokuapp.com",
+	"SERVER_GRAPHQL_URL": "https://tabear-strapi.herokuapp.com/graphql"
 }

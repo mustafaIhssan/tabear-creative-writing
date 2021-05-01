@@ -1,19 +1,20 @@
-import { useHistory, useParams } from 'react-router-dom'
 import { Button, Form } from 'antd'
-import { PageSpinner } from '../../../components/page-spinner'
-import { Layout } from '../../../components/layout'
-import { ErrorTag } from '../../../components/error-tag'
-import { firestore } from '../../../firebase'
-import { StoryForm } from '../../../components/story-form'
-import React, { useState } from 'react'
-import { useStoryById } from '../../../api/story'
+import { useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
 
-export function StoryEditPage({}) {
+import { ErrorTag } from '../../../components/error-tag'
+import { Layout } from '../../../components/layout'
+import { PageSpinner } from '../../../components/page-spinner'
+import { StoryForm } from '../../../components/story-form'
+import { firestore } from '../../../firebase'
+
+export function StoryEditPage() {
 	const [form] = Form.useForm()
 	const history = useHistory()
 	const { id }: any = useParams()
 
-	const [story, isLoading] = useStoryById(id)
+	// const [story, isLoading] = useStoryById(id)
+	const [story, isLoading] = [{}, false]
 
 	const [isUpdating, setIsUpdating] = useState(false)
 	const [isRemoving, setIsRemoving] = useState(false)
@@ -32,7 +33,7 @@ export function StoryEditPage({}) {
 				setIsUpdating(false)
 				history.replace({ pathname: '/story' })
 			})
-			.catch((e) => setError(e))
+			.catch((error_) => setError(error_))
 	}
 
 	const onRemove = () => {
@@ -49,11 +50,7 @@ export function StoryEditPage({}) {
 
 					<StoryForm data={story} form={form} />
 					<div className="flex justify-center space-x-2">
-						<Button
-							type="primary"
-							onClick={onSubmit}
-							loading={isUpdating}
-						>
+						<Button type="primary" onClick={onSubmit} loading={isUpdating}>
 							Edit Story
 						</Button>
 						<Button danger loading={isRemoving} onClick={onRemove}>

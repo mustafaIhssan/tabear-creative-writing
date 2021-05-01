@@ -1,37 +1,27 @@
-import React from 'react'
 import { Layout } from '../../components/layout'
-import { PageSpinner } from '../../components/page-spinner'
-import { UserStory } from '../../components/user-story'
-import { useStory } from '../../api/story'
-import { usePrompt } from '../../api/prompt'
-import { PromptsItem } from '../prompts/prompts-item'
+import { Prompts } from './prompts'
+import { Stories } from './stories'
+
+// const Button = styled.button(xw`
+//   bg-indigo-600
+//   hover:bg-indigo-500
+//   focus[outline-none border-indigo-700 ring]
+//   active:bg-indigo-700
+//   transition duration-150 ease-in-out
+//   relative flex justify-center
+//   px-4 py-2 text-sm
+//   font-medium leading-5 text-white
+//   rounded-md w-64 mt-5
+//
+// `)
 
 export function MainPage() {
-	const [stories, isStoryLoading] = useStory()
-	console.log(stories)
-	// const [prompts, isPromptLoading] = usePrompt()
-
-	// const isLoading = isStoryLoading && isPromptLoading
-
-	const isLoading = false
 	return (
 		<Layout>
-			<PageSpinner loading={isLoading}>
-				<div className="flex">
-					{/*<div className="flex-1">*/}
-					{/*	<h1>Latest Stories</h1>*/}
-					{/*	{[{ id: 123 }].map((i: any) => (*/}
-					{/*		<UserStory key={i.id} story={i} />*/}
-					{/*	))}*/}
-					{/*</div>*/}
-					{/*<div className="flex-1">*/}
-					{/*	<h1>Latest Prompts</h1>*/}
-					{/*	{prompts.map((item: any) => (*/}
-					{/*		<PromptsItem key={item.id} {...item} />*/}
-					{/*	))}*/}
-					{/*</div>*/}
-				</div>
-			</PageSpinner>
+			<div className="flex">
+				<Stories />
+				<Prompts />
+			</div>
 		</Layout>
 	)
 }

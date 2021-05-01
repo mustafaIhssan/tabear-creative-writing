@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import { Layout } from '../../../components/layout'
-import { useHistory, useParams } from 'react-router-dom'
-
-import { Button, Form } from 'antd'
-import { useTranslation } from 'react-i18next'
-import { StoryForm } from '../../../components/story-form'
-import { firestore } from '../../../firebase'
-import { nanoid } from 'nanoid'
-import { useDocument } from 'react-firebase-hooks/firestore'
-import { PageSpinner } from '../../../components/page-spinner'
+// import { Button, Form } from 'antd'
+// import { nanoid } from 'nanoid'
+// import { useState } from 'react'
+// import { useDocument } from 'react-firebase-hooks/firestore'
+// import { useTranslation } from 'react-i18next'
+// import { useHistory, useParams } from 'react-router-dom'
+//
+// import { Layout } from '../../../components/layout'
+// import { PageSpinner } from '../../../components/page-spinner'
+// import { StoryForm } from '../../../components/story-form'
+// import { firestore } from '../../../firebase'
 
 export function StoryNewPage() {
 	return <div>2</div>

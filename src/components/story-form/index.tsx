@@ -1,15 +1,14 @@
-import React from 'react'
-import { Form, Input, InputNumber, Select } from 'antd'
+// import { Form, Input, InputNumber, Select } from 'antd'
+import { Form, Input } from 'antd'
+
 import { rules } from '../../utils/rules'
-import { PageSpinner } from '../page-spinner'
-import { useTranslation } from 'react-i18next'
-import { useDocument } from 'react-firebase-hooks/firestore'
-import { firestore } from '../../firebase'
-import { Layout } from '../layout'
+// import { PageSpinner } from '../page-spinner'
+// import { useTranslation } from 'react-i18next'
+// import { useDocument } from 'react-firebase-hooks/firestore'
+// import { firestore } from '../../firebase'
+// import { Layout } from '../layout'
 
 export function StoryForm({ form, data }: any) {
-	console.log(data)
-
 	const isEnglish = true
 
 	return (
@@ -18,10 +17,7 @@ export function StoryForm({ form, data }: any) {
 				<h1 className="text-xl mx-12">{data.prompt?.content}</h1>
 				<div className="flex justify-center mt-2 space-x-2 ">
 					{data?.prompt?.tags?.map((i: any) => (
-						<span
-							className="p-2 bg-blue-200"
-							key={data?.prompt?.id + i}
-						>
+						<span className="p-2 bg-blue-200" key={data?.prompt?.id + i}>
 							{i}
 						</span>
 					))}

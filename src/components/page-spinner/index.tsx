@@ -1,14 +1,14 @@
-import React from 'react'
 import { Spin } from 'antd'
+import { ReactNode } from 'react'
 
 interface SpinnerProps {
 	loading?: boolean
-	children?: React.ReactNode
+	children?: ReactNode
 }
 
 export function PageSpinner({ loading, children }: SpinnerProps) {
 	return loading ? (
-		<div className='flex items-center justify-center'>
+		<div className="flex items-center justify-center">
 			<Spin />
 		</div>
 	) : (

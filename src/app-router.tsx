@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	BrowserRouter as Router,
 	Redirect,
@@ -6,19 +5,19 @@ import {
 	Switch,
 } from 'react-router-dom'
 
-import { useAuth } from './security'
 import { LoginPage } from './pages/login'
-import { PromptsPage } from './pages/prompts'
-import { SingupPage } from './pages/signup'
 import { MainPage } from './pages/main'
 import { NotFound } from './pages/NotFound'
-import { StoriesPage } from './pages/stories'
-import { PromptsViewPage } from './pages/prompt/view'
 import { PromptEditPage } from './pages/prompt/edit'
 import { PromptsNewPage } from './pages/prompt/new'
-import { StoryPage } from './pages/story/view'
+import { PromptsViewPage } from './pages/prompt/view'
+import { PromptsPage } from './pages/prompts'
+import { SingupPage } from './pages/signup'
+import { StoriesPage } from './pages/stories'
 import { StoryEditPage } from './pages/story/edit'
 import { StoryNewPage } from './pages/story/new'
+import { StoryPage } from './pages/story/view'
+import { useAuth } from './security'
 
 export function AppRouter() {
 	return (

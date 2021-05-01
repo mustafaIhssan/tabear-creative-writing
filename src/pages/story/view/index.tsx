@@ -1,11 +1,10 @@
-import React from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { Layout } from '../../../components/layout'
-import { useDocument } from 'react-firebase-hooks/firestore'
-import { firestore } from '../../../firebase'
-import { PageSpinner } from '../../../components/page-spinner'
-import { CommentSection } from '../../../components/comment-section'
-import { Button } from 'antd'
+// import { Link, useParams } from 'react-router-dom'
+// import { Layout } from '../../../components/layout'
+// import { useDocument } from 'react-firebase-hooks/firestore'
+// import { firestore } from '../../../firebase'
+// import { PageSpinner } from '../../../components/page-spinner'
+// import { CommentSection } from '../../../components/comment-section'
+// import { Button } from 'antd'
 
 export function StoryPage() {
 	return <div>dfb</div>

@@ -1,40 +1,45 @@
 module.exports = {
-	extends: ['plugin:@wordpress/eslint-plugin/recommended'],
-	globals: {
-		fetch: true,
+	parserOptions: {
+		ecmaVersion: 2020,
+		sourceType: 'module',
+		ecmaFeatures: {
+			jsx: true,
+		},
 	},
 	env: {
 		browser: true,
+		node: true,
+		es6: true,
 	},
-	plugins: ['@typescript-eslint'],
-	parser: '@typescript-eslint/parser',
-	parserOptions: {
-		project: './tsconfig.json',
-	},
+	plugins: ['@typescript-eslint', 'simple-import-sort'],
 	settings: {
-		'import/resolver': {
-			typescript: {
-				alwaysTryTypes: true,
-			},
+		react: {
+			version: 'detect',
 		},
 	},
+	extends: [
+		'plugin:@typescript-eslint/recommended',
+		'eslint:recommended',
+		'plugin:jsx-a11y/recommended',
+		'plugin:react/recommended',
+		'plugin:prettier/recommended',
+		'plugin:sonarjs/recommended',
+		'plugin:unicorn/recommended',
+		'plugin:security/recommended',
+		'plugin:react-hooks/recommended',
+	],
 	rules: {
-		'dependency-group': 'off',
-		'gutenberg-phase': 'off',
-		'i18n-ellipsis': 'off',
-		'i18n-no-collapsible-whitespace': 'off',
-		'i18n-no-placeholders-only': 'off',
-		'@wordpress/no-unused-vars-before-return': 'off',
-		'i18n-no-variables	': 'off',
-		'i18n-text-domain': 'off',
-		'i18n-translator-comments': 'off',
-		'no-console': 'off',
+		'unicorn/no-null': 'off',
+		'@typescript-eslint/explicit-module-boundary-types': 'off',
 		'no-unused-vars': 'off',
-		'prettier/prettier': [
-			'error',
-			{
-				endOfLine: 'auto',
-			},
-		],
+		'@typescript-eslint/no-unused-vars': 'off',
+		'unicorn/consistent-function-scoping': 'off',
+		'no-console': 'warn',
+		'react/react-in-jsx-scope': 'off',
+		'unicorn/prevent-abbreviations': 'off',
+		'react/prop-types': 'off',
+		'unicorn/filename-case': 'off',
+		'simple-import-sort/imports': 'error',
+		'simple-import-sort/exports': 'error',
 	},
 }
