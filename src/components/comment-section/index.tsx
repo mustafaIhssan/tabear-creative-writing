@@ -1,22 +1,11 @@
-import { useCollection } from 'react-firebase-hooks/firestore'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
 
-import { firestore } from '../../firebase'
-
-export function CommentSection({ story }: any) {
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	const [_comments, isLoading] = useCollection(
-		firestore.collection('comments').where('story', '==', story)
-	)
-
-	const comments = _comments?.docs?.map((doc: any) => ({
-		...doc.data(),
-		id: doc.id,
-	}))
-
+export function CommentSection({ data }: any) {
 	return (
 		<div className="m-5">
-			{comments?.map((i: any) => (
+			{data?.map((i: Record<string, unknown>) => (
 				<Comment key={i.id} comment={i} />
 			))}
 		</div>
@@ -31,7 +20,7 @@ export function Comment({ comment }: any) {
 					{comment.score}
 				</div>
 				<div className="text-xl leading-6 font-medium text-gray-900 w-full">
-					{comment.user}
+					{comment?.user?.username} {dayjs(comment?.createdAt).fromNow()}{' '}
 				</div>
 			</div>
 			{comment.parent && <div>Re: {comment.parent}</div>}
